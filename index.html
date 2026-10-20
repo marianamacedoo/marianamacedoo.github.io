@@ -1,0 +1,426 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mariana Macedo · Ciência de Dados</title>
+<meta name="description" content="Portfólio de Mariana Macedo Santos — estudante de Ciência da Computação (UFOP) com foco em ciência e engenharia de dados.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='44' fill='%23c9b6ff'/><text x='50' y='66' font-size='46' text-anchor='middle' font-family='Georgia' fill='%233a3354'>M</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fdfbf7;
+    --surface: #ffffff;
+    --ink: #2f2a3d;
+    --muted: #6f6880;
+    --line: #ece6f2;
+    --lilac: #c9b6ff;
+    --peach: #ffd3b8;
+    --mint: #bdebd7;
+    --sky: #bfe0ff;
+    --butter: #fff0b3;
+    --rose: #ffc8dd;
+    --accent: #7a5cd6;
+    --radius: 22px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1c1a24;
+      --surface: #252231;
+      --ink: #f2eefb;
+      --muted: #b2abc4;
+      --line: #36324a;
+      --accent: #c9b6ff;
+    }
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "Inter", system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+  a { color: inherit; }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 24px; }
+
+  /* fundo com bolhas pastel flutuando */
+  .blobs { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+  .blob {
+    position: absolute; border-radius: 50%;
+    filter: blur(60px); opacity: .55;
+    animation: float 18s ease-in-out infinite alternate;
+  }
+  .b1 { width: 420px; height: 420px; background: var(--lilac); top: -120px; left: -100px; }
+  .b2 { width: 360px; height: 360px; background: var(--peach); top: 30%; right: -120px; animation-delay: -6s; }
+  .b3 { width: 320px; height: 320px; background: var(--mint); bottom: -100px; left: 20%; animation-delay: -12s; }
+  @media (prefers-color-scheme: dark) { .blob { opacity: .18; } }
+  @keyframes float {
+    0%   { transform: translate(0, 0) scale(1); }
+    50%  { transform: translate(40px, 60px) scale(1.08); }
+    100% { transform: translate(-30px, 20px) scale(.95); }
+  }
+
+  /* navegação */
+  nav {
+    position: sticky; top: 0; z-index: 10;
+    backdrop-filter: blur(14px);
+    background: color-mix(in srgb, var(--bg) 75%, transparent);
+    border-bottom: 1px solid var(--line);
+  }
+  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .logo { font-family: "Fraunces", serif; font-weight: 600; font-size: 1.25rem; text-decoration: none; }
+  .logo span { color: var(--accent); }
+  nav ul { display: flex; gap: 26px; list-style: none; }
+  nav ul a { text-decoration: none; color: var(--muted); font-size: .95rem; position: relative; transition: color .2s; }
+  nav ul a::after {
+    content: ""; position: absolute; left: 0; bottom: -4px; height: 2px; width: 0;
+    background: var(--accent); border-radius: 2px; transition: width .25s;
+  }
+  nav ul a:hover { color: var(--ink); }
+  nav ul a:hover::after { width: 100%; }
+
+  /* hero */
+  .hero { min-height: calc(100vh - 64px); display: flex; align-items: center; padding: 60px 0; }
+  .hero .wrap { display: grid; grid-template-columns: 1.4fr 1fr; gap: 48px; align-items: center; }
+  .hello {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--surface); border: 1px solid var(--line);
+    padding: 6px 14px; border-radius: 999px; font-size: .88rem; color: var(--muted);
+  }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: #6fcf97; animation: pulse 2s infinite; }
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(111,207,151,.6); }
+    70% { box-shadow: 0 0 0 10px rgba(111,207,151,0); }
+    100% { box-shadow: 0 0 0 0 rgba(111,207,151,0); }
+  }
+  h1 {
+    font-family: "Fraunces", serif; font-weight: 600;
+    font-size: clamp(2.6rem, 6vw, 4.2rem); line-height: 1.08; margin: 22px 0 14px;
+  }
+  h1 .hl { background: linear-gradient(120deg, var(--lilac), var(--rose), var(--peach)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .role { font-size: 1.25rem; color: var(--muted); min-height: 2em; }
+  .typed { color: var(--ink); font-weight: 600; border-right: 2px solid var(--accent); padding-right: 3px; animation: caret .8s step-end infinite; }
+  @keyframes caret { 50% { border-color: transparent; } }
+  .hero p.lead { max-width: 520px; margin: 18px 0 30px; color: var(--muted); }
+  .btns { display: flex; flex-wrap: wrap; gap: 12px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 22px; border-radius: 999px; text-decoration: none; font-weight: 500;
+    border: 1px solid var(--line); background: var(--surface);
+    transition: transform .2s, box-shadow .2s, background .2s;
+  }
+  .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 24px -12px rgba(122,92,214,.5); }
+  .btn.primary { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+
+  .portrait { position: relative; justify-self: center; width: min(320px, 80vw); aspect-ratio: 1; }
+  .portrait img {
+    width: 100%; height: 100%; object-fit: cover;
+    border-radius: 42% 58% 55% 45% / 48% 42% 58% 52%;
+    border: 6px solid var(--surface);
+    animation: morph 10s ease-in-out infinite;
+    box-shadow: 0 30px 60px -30px rgba(122,92,214,.45);
+  }
+  @keyframes morph {
+    0%,100% { border-radius: 42% 58% 55% 45% / 48% 42% 58% 52%; }
+    50%     { border-radius: 58% 42% 45% 55% / 55% 58% 42% 45%; }
+  }
+  .sticker {
+    position: absolute; background: var(--surface); border: 1px solid var(--line);
+    padding: 8px 14px; border-radius: 14px; font-size: .85rem; font-weight: 500;
+    box-shadow: 0 8px 20px -12px rgba(0,0,0,.25);
+    animation: bob 4s ease-in-out infinite;
+  }
+  .s1 { top: 8%; left: -14%; }
+  .s2 { bottom: 12%; right: -12%; animation-delay: -2s; }
+  @keyframes bob { 50% { transform: translateY(-10px); } }
+
+  /* seções */
+  section { padding: 90px 0; }
+  .eyebrow { font-size: .8rem; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+  h2 { font-family: "Fraunces", serif; font-weight: 600; font-size: clamp(1.9rem, 4vw, 2.6rem); margin: 6px 0 36px; }
+
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+
+  /* sobre */
+  .about { display: grid; grid-template-columns: 1.3fr 1fr; gap: 40px; }
+  .about p { color: var(--muted); margin-bottom: 14px; }
+  .facts { display: grid; gap: 12px; }
+  .fact { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 14px 18px; display: flex; gap: 12px; align-items: center; }
+  .fact .ic { width: 38px; height: 38px; border-radius: 12px; display: grid; place-items: center; font-size: 1.1rem; flex: none; }
+
+  /* trajetória */
+  .timeline { position: relative; padding-left: 28px; }
+  .timeline::before { content: ""; position: absolute; left: 7px; top: 6px; bottom: 6px; width: 2px; background: var(--line); }
+  .item { position: relative; margin-bottom: 26px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px 24px; transition: transform .25s; }
+  .item:hover { transform: translateX(6px); }
+  .item::before { content: ""; position: absolute; left: -28px; top: 26px; width: 16px; height: 16px; border-radius: 50%; background: var(--c, var(--lilac)); border: 3px solid var(--bg); }
+  .item .when { font-size: .85rem; color: var(--muted); }
+  .item h3 { font-size: 1.1rem; margin: 2px 0 2px; }
+  .item .where { color: var(--accent); font-size: .92rem; font-weight: 500; }
+  .item p { color: var(--muted); margin-top: 8px; font-size: .95rem; }
+
+  /* projetos */
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 20px; }
+  .card {
+    position: relative; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 26px; text-decoration: none; display: flex; flex-direction: column; gap: 10px;
+    transition: transform .3s, box-shadow .3s; overflow: hidden;
+  }
+  .card::before {
+    content: ""; position: absolute; inset: 0 0 auto 0; height: 6px; background: var(--c);
+    transition: height .35s; z-index: 0; opacity: .9;
+  }
+  .card:hover { transform: translateY(-6px) rotate(-.4deg); box-shadow: 0 22px 40px -24px rgba(47,42,61,.35); }
+  .card:hover::before { height: 100%; opacity: .25; }
+  .card > * { position: relative; z-index: 1; }
+  .card .emoji { font-size: 1.8rem; }
+  .card h3 { font-size: 1.12rem; }
+  .card p { color: var(--muted); font-size: .94rem; flex: 1; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag { font-size: .76rem; padding: 3px 10px; border-radius: 999px; background: color-mix(in srgb, var(--c) 45%, transparent); }
+  .card .go { font-size: .88rem; font-weight: 500; color: var(--accent); }
+  .more { text-align: center; margin-top: 30px; }
+
+  /* habilidades */
+  .skills { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 18px; }
+  .skill { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; }
+  .skill h3 { font-size: 1rem; margin-bottom: 12px; display: flex; gap: 8px; align-items: center; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip { font-size: .84rem; padding: 5px 12px; border-radius: 999px; background: var(--c); color: #2f2a3d; transition: transform .2s; }
+  .chip:hover { transform: scale(1.08) rotate(-2deg); }
+
+  /* contato */
+  .contact { text-align: center; background: var(--surface); border: 1px solid var(--line); border-radius: 32px; padding: 60px 24px; position: relative; overflow: hidden; }
+  .contact::after { content: ""; position: absolute; width: 280px; height: 280px; border-radius: 50%; background: var(--rose); filter: blur(70px); opacity: .45; top: -120px; right: -80px; }
+  .contact > * { position: relative; z-index: 1; }
+  .contact p { color: var(--muted); max-width: 460px; margin: 0 auto 26px; }
+  .contact .btns { justify-content: center; }
+
+  footer { text-align: center; color: var(--muted); font-size: .85rem; padding: 40px 0 50px; }
+
+  @media (max-width: 820px) {
+    nav ul { display: none; }
+    .hero .wrap, .about { grid-template-columns: 1fr; }
+    .portrait { order: -1; width: 220px; }
+    .s1 { left: -20%; } .s2 { right: -20%; }
+    section { padding: 64px 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    .reveal { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+  <div class="blobs" aria-hidden="true"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div></div>
+
+  <nav>
+    <div class="wrap">
+      <a href="#" class="logo">mariana<span>.</span></a>
+      <ul>
+        <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#trajetoria">Trajetória</a></li>
+        <li><a href="#projetos">Projetos</a></li>
+        <li><a href="#habilidades">Habilidades</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="wrap">
+      <div>
+        <span class="hello"><span class="dot"></span> Aberta a oportunidades em dados</span>
+        <h1>Oi, eu sou a <span class="hl">Mariana Macedo</span></h1>
+        <div class="role">Eu trabalho com <span class="typed" id="typed">ciência de dados</span></div>
+        <p class="lead">Estudante de Ciência da Computação na UFOP. Construo pipelines de dados, modelos de machine learning e análises que ajudam a tomar decisões.</p>
+        <div class="btns">
+          <a class="btn primary" href="#projetos">Ver projetos →</a>
+          <a class="btn" href="curriculo-mariana-macedo.pdf" target="_blank" rel="noopener">Baixar currículo</a>
+        </div>
+      </div>
+      <div class="portrait">
+        <img src="https://avatars.githubusercontent.com/u/113864114?v=4" alt="Foto de Mariana Macedo">
+        <span class="sticker s1">🐍 Python + SQL</span>
+        <span class="sticker s2">📍 Belo Horizonte</span>
+      </div>
+    </div>
+  </header>
+
+  <section id="sobre">
+    <div class="wrap">
+      <div class="eyebrow reveal">Sobre mim</div>
+      <h2 class="reveal">Dados, curiosidade e café</h2>
+      <div class="about">
+        <div class="reveal">
+          <p>Sou graduanda em Ciência da Computação na Universidade Federal de Ouro Preto, com conclusão prevista para dezembro de 2026. Meu objetivo é atuar profissionalmente em ciência de dados.</p>
+          <p>Fiz intercâmbio em <strong>Industrial Data Science</strong> na Montanuniversität Leoben, na Áustria, onde aprofundei machine learning aplicado e otimização de processos. Hoje atuo no setor de Data Analytics do Laboratório TerraLab, cuidando de pipelines de ETL e infraestrutura de dados.</p>
+          <p>Também gosto de trabalhar com pessoas: fui vice-diretora do Diretório Acadêmico de Ciência da Computação, organizando eventos e workshops.</p>
+        </div>
+        <div class="facts reveal">
+          <div class="fact"><span class="ic" style="background:var(--lilac)">🎓</span><div><strong>Ciência da Computação</strong><br><small>UFOP · 2022 – 2026</small></div></div>
+          <div class="fact"><span class="ic" style="background:var(--sky)">🇦🇹</span><div><strong>Intercâmbio em Industrial Data Science</strong><br><small>Montanuniversität Leoben · 2026</small></div></div>
+          <div class="fact"><span class="ic" style="background:var(--mint)">📊</span><div><strong>Data Analytics</strong><br><small>Laboratório TerraLab · atual</small></div></div>
+          <div class="fact"><span class="ic" style="background:var(--peach)">🌍</span><div><strong>Inglês avançado</strong><br><small>Idiomas</small></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="trajetoria">
+    <div class="wrap">
+      <div class="eyebrow reveal">Trajetória</div>
+      <h2 class="reveal">Experiência & formação</h2>
+      <div class="timeline">
+        <div class="item reveal" style="--c:var(--mint)">
+          <div class="when">08/2026 — presente</div>
+          <h3>Data Analytics</h3>
+          <div class="where">Laboratório TerraLab · UFOP</div>
+          <p>Desenvolvimento e otimização de infraestruturas de dados e pipelines de ETL em Python e SQL para grandes volumes de dados. Gestão e monitoramento de ambientes com Apache Airflow, Apache Doris e Apache Superset.</p>
+        </div>
+        <div class="item reveal" style="--c:var(--sky)">
+          <div class="when">02/2026 — 07/2026</div>
+          <h3>Intercâmbio Acadêmico · Industrial Data Science</h3>
+          <div class="where">Montanuniversität Leoben · Áustria</div>
+          <p>Especialização prática em Ciência de Dados Industrial, Machine Learning aplicado e Otimização de Processos.</p>
+        </div>
+        <div class="item reveal" style="--c:var(--peach)">
+          <div class="when">2024 — 2026</div>
+          <h3>Vice-Diretora</h3>
+          <div class="where">Diretório Acadêmico de Ciência da Computação · UFOP</div>
+          <p>Organização de eventos acadêmicos e workshops técnicos, gestão de equipes, coordenação de projetos internos e representação estudantil.</p>
+        </div>
+        <div class="item reveal" style="--c:var(--lilac)">
+          <div class="when">2023</div>
+          <h3>Iniciação Científica · Automação e Pipelines de Dados</h3>
+          <div class="where">UFOP</div>
+          <p>Scripts em Python para automatizar extração, tratamento e integração de dados. Uso de PostgreSQL para estruturação de bancos e consultas analíticas.</p>
+        </div>
+        <div class="item reveal" style="--c:var(--butter)">
+          <div class="when">2019 — 2021</div>
+          <h3>Técnico em Informática</h3>
+          <div class="where">Instituto Federal do Norte de Minas Gerais (IFNMG)</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projetos">
+    <div class="wrap">
+      <div class="eyebrow reveal">Projetos</div>
+      <h2 class="reveal">Coisas que eu construí</h2>
+      <div class="grid">
+        <a class="card reveal" style="--c:var(--rose)" href="https://github.com/marianamacedoo/transphobia-detection-bertimbau" target="_blank" rel="noopener">
+          <span class="emoji">🏳️‍⚧️</span>
+          <h3>Detecção de discurso transfóbico com BERTimbau</h3>
+          <p>Fine-tuning do BERTimbau para classificar tweets como transfóbicos ou não. 93,1% de acurácia em validação balanceada.</p>
+          <div class="tags"><span class="tag">NLP</span><span class="tag">PyTorch</span><span class="tag">Transformers</span></div>
+          <span class="go">Ver no GitHub →</span>
+        </a>
+        <a class="card reveal" style="--c:var(--sky)" href="https://github.com/marianamacedoo/transcricao-videos" target="_blank" rel="noopener">
+          <span class="emoji">🎬</span>
+          <h3>Transcrição de vídeos full-stack</h3>
+          <p>Aplicação que transcreve áudio e vídeo, com upload assíncrono, autenticação, divisão de arquivos grandes e cotas diárias por usuário.</p>
+          <div class="tags"><span class="tag">TypeScript</span><span class="tag">Next.js</span><span class="tag">Node.js</span><span class="tag">Firebase</span></div>
+          <span class="go">Ver no GitHub →</span>
+        </a>
+        <a class="card reveal" style="--c:var(--mint)" href="https://github.com/marianamacedoo/MineracaoDeDados" target="_blank" rel="noopener">
+          <span class="emoji">⛏️</span>
+          <h3>Mineração de Dados</h3>
+          <p>Práticas da disciplina de Mineração de Dados: exploração, pré-processamento e modelagem em notebooks.</p>
+          <div class="tags"><span class="tag">Jupyter</span><span class="tag">Pandas</span><span class="tag">scikit-learn</span></div>
+          <span class="go">Ver no GitHub →</span>
+        </a>
+        <a class="card reveal" style="--c:var(--lilac)" href="https://github.com/marianamacedoo/IABCC325" target="_blank" rel="noopener">
+          <span class="emoji">🤖</span>
+          <h3>Inteligência Artificial</h3>
+          <p>Implementações e exercícios da disciplina de Inteligência Artificial em Python.</p>
+          <div class="tags"><span class="tag">Python</span><span class="tag">IA</span></div>
+          <span class="go">Ver no GitHub →</span>
+        </a>
+        <a class="card reveal" style="--c:var(--butter)" href="https://github.com/marianamacedoo/python-course" target="_blank" rel="noopener">
+          <span class="emoji">🐍</span>
+          <h3>Python do básico ao avançado</h3>
+          <p>Exercícios e projetos do curso "Programação em Python ao avançado".</p>
+          <div class="tags"><span class="tag">Python</span></div>
+          <span class="go">Ver no GitHub →</span>
+        </a>
+        <a class="card reveal" style="--c:var(--peach)" href="https://github.com/marianamacedoo/Automato-Celular" target="_blank" rel="noopener">
+          <span class="emoji">🧬</span>
+          <h3>Autômato Celular</h3>
+          <p>Simulação de autômatos celulares.</p>
+          <div class="tags"><span class="tag">Simulação</span></div>
+          <span class="go">Ver no GitHub →</span>
+        </a>
+      </div>
+      <div class="more reveal"><a class="btn" href="https://github.com/marianamacedoo?tab=repositories" target="_blank" rel="noopener">Ver todos os repositórios</a></div>
+    </div>
+  </section>
+
+  <section id="habilidades">
+    <div class="wrap">
+      <div class="eyebrow reveal">Habilidades</div>
+      <h2 class="reveal">Minha caixa de ferramentas</h2>
+      <div class="skills">
+        <div class="skill reveal" style="--c:var(--lilac)"><h3>📈 Análise de dados</h3><div class="chips"><span class="chip">Python</span><span class="chip">Pandas</span><span class="chip">NumPy</span><span class="chip">R</span><span class="chip">Estatística</span><span class="chip">ETL</span></div></div>
+        <div class="skill reveal" style="--c:var(--mint)"><h3>🧠 Machine Learning</h3><div class="chips"><span class="chip">scikit-learn</span><span class="chip">PyTorch</span><span class="chip">NLP</span><span class="chip">TF-IDF</span></div></div>
+        <div class="skill reveal" style="--c:var(--sky)"><h3>🗄️ Dados & SQL</h3><div class="chips"><span class="chip">SQL</span><span class="chip">PostgreSQL</span><span class="chip">Modelagem relacional</span><span class="chip">Airflow</span><span class="chip">Apache Doris</span></div></div>
+        <div class="skill reveal" style="--c:var(--peach)"><h3>📊 Visualização & BI</h3><div class="chips"><span class="chip">Power BI</span><span class="chip">Superset</span><span class="chip">Matplotlib</span><span class="chip">Jupyter</span></div></div>
+        <div class="skill reveal" style="--c:var(--rose)"><h3>⚙️ Engenharia</h3><div class="chips"><span class="chip">Git/GitHub</span><span class="chip">Docker</span><span class="chip">Flask</span><span class="chip">REST APIs</span><span class="chip">Node.js</span></div></div>
+        <div class="skill reveal" style="--c:var(--butter)"><h3>💬 Linguagens</h3><div class="chips"><span class="chip">Python</span><span class="chip">SQL</span><span class="chip">R</span><span class="chip">C/C++</span><span class="chip">Java</span><span class="chip">JavaScript</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contato">
+    <div class="wrap">
+      <div class="contact reveal">
+        <div class="eyebrow">Contato</div>
+        <h2>Vamos conversar?</h2>
+        <p>Estou buscando oportunidades em ciência de dados. Fique à vontade para me chamar!</p>
+        <div class="btns">
+          <a class="btn primary" href="mailto:marimacedosantos@gmail.com">✉️ marimacedosantos@gmail.com</a>
+          <a class="btn" href="https://www.linkedin.com/in/mariana-macedo-7b9ab3227" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="btn" href="https://github.com/marianamacedoo" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>Feito com 💜 por Mariana Macedo · <span id="year"></span></footer>
+
+<script>
+  // efeito de digitação
+  const words = ["ciência de dados", "pipelines de ETL", "machine learning", "NLP", "visualização de dados"];
+  const el = document.getElementById("typed");
+  let w = 0, i = words[0].length, deleting = true;
+  function tick() {
+    const word = words[w];
+    i += deleting ? -1 : 1;
+    el.textContent = word.slice(0, i);
+    let delay = deleting ? 45 : 85;
+    if (!deleting && i === word.length) { deleting = true; delay = 1800; }
+    else if (deleting && i === 0) { deleting = false; w = (w + 1) % words.length; delay = 300; }
+    setTimeout(tick, delay);
+  }
+  if (!matchMedia("(prefers-reduced-motion: reduce)").matches) setTimeout(tick, 2000);
+
+  // aparecer ao rolar
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+  }, { threshold: .12 });
+  document.querySelectorAll(".reveal").forEach((el, n) => {
+    el.style.transitionDelay = (n % 3) * 80 + "ms";
+    io.observe(el);
+  });
+
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+</body>
+</html>

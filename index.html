@@ -82,6 +82,15 @@
     background: var(--accent); border-radius: 2px; transition: width .25s;
   }
   nav ul a:hover { color: var(--ink); }
+  nav .wrap > ul { margin-left: auto; margin-right: 22px; }
+  .lang {
+    display: inline-flex; padding: 3px; gap: 2px; border-radius: 999px; cursor: pointer;
+    border: 1px solid var(--line); background: var(--surface); font: 600 .78rem "Inter", sans-serif;
+  }
+  .lang span { padding: 4px 10px; border-radius: 999px; color: var(--muted); transition: background .25s, color .25s; }
+  html[lang="pt-BR"] .lang [data-l="pt"], html[lang="en"] .lang [data-l="en"] { background: var(--lilac); color: #2f2a3d; }
+  .i18n-fade { animation: i18nfade .35s ease; }
+  @keyframes i18nfade { from { opacity: .2; } to { opacity: 1; } }
   nav ul a:hover::after { width: 100%; }
 
   /* hero */
@@ -232,6 +241,7 @@
         <li><a href="#habilidades">Habilidades</a></li>
         <li><a href="#contato">Contato</a></li>
       </ul>
+      <button class="lang" id="lang" type="button" aria-label="Switch to English"><span data-l="pt">PT</span><span data-l="en">EN</span></button>
     </div>
   </nav>
 
@@ -240,7 +250,7 @@
       <div>
         <span class="hello"><span class="dot"></span> Aberta a oportunidades em dados</span>
         <h1>Oi, eu sou a <span class="hl">Mariana Macedo</span></h1>
-        <div class="role">Eu trabalho com <span class="typed" id="typed">ciência de dados</span></div>
+        <div class="role"><span class="role-pre">Eu trabalho com</span> <span class="typed" id="typed">ciência de dados</span></div>
         <p class="lead">Estudante de Ciência da Computação na UFOP. Construo pipelines de dados, modelos de machine learning e análises que ajudam a tomar decisões.</p>
         <div class="btns">
           <a class="btn primary" href="#projetos">Ver projetos →</a>
@@ -404,10 +414,113 @@
 
 
 <script>
+  // traduções: texto em português -> inglês
+  const EN = {
+    "Sobre": "About", "Trajetória": "Journey", "Projetos": "Projects", "Habilidades": "Skills", "Contato": "Contact",
+    '<span class="dot"></span> Aberta a oportunidades em dados': '<span class="dot"></span> Open to data opportunities',
+    'Oi, eu sou a <span class="hl">Mariana Macedo</span>': 'Hi, I\'m <span class="hl">Mariana Macedo</span>',
+    "Eu trabalho com": "I work with",
+    "Estudante de Ciência da Computação na UFOP. Construo pipelines de dados, modelos de machine learning e análises que ajudam a tomar decisões.":
+      "Computer Science student at UFOP (Brazil). I build data pipelines, machine learning models and analyses that support decision-making.",
+    "Ver projetos →": "See projects →", "Baixar currículo": "Download résumé (PT)",
+    "📍 Belo Horizonte": "📍 Belo Horizonte, Brazil",
+    "Sobre mim": "About me", "Dados, curiosidade e café": "Data, curiosity and coffee",
+    "Sou graduanda em Ciência da Computação na Universidade Federal de Ouro Preto, com conclusão prevista para dezembro de 2026. Meu objetivo é atuar profissionalmente em ciência de dados.":
+      "I'm a Computer Science undergraduate at the Federal University of Ouro Preto (UFOP), graduating in December 2026. My goal is to work professionally in data science.",
+    "Fiz intercâmbio em <strong>Industrial Data Science</strong> na Montanuniversität Leoben, na Áustria, onde aprofundei machine learning aplicado e otimização de processos. Hoje atuo no setor de Data Analytics do Laboratório TerraLab, cuidando de pipelines de ETL e infraestrutura de dados.":
+      "I did an exchange semester in <strong>Industrial Data Science</strong> at Montanuniversität Leoben, Austria, where I deepened my knowledge of applied machine learning and process optimization. Today I work in the Data Analytics team at TerraLab, taking care of ETL pipelines and data infrastructure.",
+    "Também gosto de trabalhar com pessoas: fui vice-diretora do Diretório Acadêmico de Ciência da Computação, organizando eventos e workshops.":
+      "I also enjoy working with people: I was vice-president of the Computer Science Student Association, organizing events and workshops.",
+    "Ciência da Computação": "Computer Science",
+    "Intercâmbio em Industrial Data Science": "Exchange in Industrial Data Science",
+    "Laboratório TerraLab · atual": "TerraLab · current",
+    "Inglês avançado": "Advanced English", "Idiomas": "Languages",
+    "Experiência &amp; formação": "Experience &amp; education",
+    "08/2026 — presente": "08/2026 — present",
+    "Laboratório TerraLab · UFOP": "TerraLab · UFOP",
+    "Desenvolvimento e otimização de infraestruturas de dados e pipelines de ETL em Python e SQL para grandes volumes de dados. Gestão e monitoramento de ambientes com Apache Airflow, Apache Doris e Apache Superset.":
+      "Building and optimizing data infrastructure and ETL pipelines in Python and SQL for large data volumes. Managing and monitoring environments with Apache Airflow, Apache Doris and Apache Superset.",
+    "Intercâmbio Acadêmico · Industrial Data Science": "Academic Exchange · Industrial Data Science",
+    "Montanuniversität Leoben · Áustria": "Montanuniversität Leoben · Austria",
+    "Especialização prática em Ciência de Dados Industrial, Machine Learning aplicado e Otimização de Processos.":
+      "Hands-on specialization in Industrial Data Science, applied Machine Learning and Process Optimization.",
+    "Vice-Diretora": "Vice-President",
+    "Diretório Acadêmico de Ciência da Computação · UFOP": "Computer Science Student Association · UFOP",
+    "Organização de eventos acadêmicos e workshops técnicos, gestão de equipes, coordenação de projetos internos e representação estudantil.":
+      "Organized academic events and technical workshops, managed teams, coordinated internal projects and represented students.",
+    "Iniciação Científica · Automação e Pipelines de Dados": "Undergraduate Research · Data Automation and Pipelines",
+    "Scripts em Python para automatizar extração, tratamento e integração de dados. Uso de PostgreSQL para estruturação de bancos e consultas analíticas.":
+      "Python scripts to automate data extraction, cleaning and integration. PostgreSQL for database design and analytical queries.",
+    "Técnico em Informática": "IT Technician (high school technical degree)",
+    "Instituto Federal do Norte de Minas Gerais (IFNMG)": "Federal Institute of Northern Minas Gerais (IFNMG)",
+    "Coisas que eu construí": "Things I've built",
+    "TCC 1 · Classificação automática de mensagens de erro em programação": "Thesis I · Automatic classification of programming error messages",
+    "Primeira etapa do meu TCC. Classifica erros de compilação em C pelo tópico de programação ligado ao erro, como base para um sistema de recomendação educacional. Chegou a 94% de acurácia usando só a mensagem de erro.":
+      "First stage of my undergraduate thesis. It classifies C compilation errors by the programming topic behind them, as a basis for an educational recommender system. Reached 94% accuracy using only the error message.",
+    "Detecção de discurso transfóbico com BERTimbau": "Transphobic hate speech detection with BERTimbau",
+    "Fine-tuning do BERTimbau para classificar tweets como transfóbicos ou não. 93,1% de acurácia em validação balanceada.":
+      "Fine-tuned BERTimbau (Portuguese BERT) to classify tweets as transphobic or not. 93.1% accuracy on a balanced validation set.",
+    "Transcrição de vídeos full-stack": "Full-stack video transcription",
+    "Aplicação que transcreve áudio e vídeo, com upload assíncrono, autenticação, divisão de arquivos grandes e cotas diárias por usuário.":
+      "App that transcribes audio and video, with asynchronous upload, authentication, large-file splitting and daily per-user quotas.",
+    "Mineração de Dados": "Data Mining",
+    "Práticas da disciplina de Mineração de Dados: exploração, pré-processamento e modelagem em notebooks.":
+      "Data Mining course work: exploration, preprocessing and modeling in notebooks.",
+    "Inteligência Artificial": "Artificial Intelligence",
+    "Implementações e exercícios da disciplina de Inteligência Artificial em Python.": "Implementations and exercises from the Artificial Intelligence course, in Python.",
+    "Python do básico ao avançado": "Python from beginner to advanced",
+    'Exercícios e projetos do curso "Programação em Python ao avançado".': "Exercises and projects from an advanced Python programming course.",
+    "Autômato Celular": "Cellular Automaton", "Simulação de autômatos celulares.": "Cellular automata simulation.",
+    "Simulação": "Simulation", "IA": "AI",
+    "Ver no GitHub →": "View on GitHub →", "Ver todos os repositórios": "See all repositories",
+    "Minha caixa de ferramentas": "My toolbox",
+    "📈 Análise de dados": "📈 Data analysis", "🗄️ Dados &amp; SQL": "🗄️ Data &amp; SQL",
+    "📊 Visualização &amp; BI": "📊 Visualization &amp; BI", "⚙️ Engenharia": "⚙️ Engineering", "💬 Linguagens": "💬 Languages",
+    "Estatística": "Statistics", "Modelagem relacional": "Relational modeling",
+    "Vamos conversar?": "Let's talk?",
+    "Estou buscando oportunidades em ciência de dados. Fique à vontade para me chamar!": "I'm looking for opportunities in data science. Feel free to reach out!",
+  };
+  const META = {
+    pt: { title: "Mariana Macedo · Ciência de Dados", alt: "Foto de Mariana Macedo", btn: "Switch to English",
+          words: ["ciência de dados", "pipelines de ETL", "machine learning", "NLP", "visualização de dados"] },
+    en: { title: "Mariana Macedo · Data Science", alt: "Photo of Mariana Macedo", btn: "Mudar para português",
+          words: ["data science", "ETL pipelines", "machine learning", "NLP", "data visualization"] },
+  };
+  const targets = [...document.querySelectorAll(
+    "nav ul a, .hello, h1, .role-pre, .lead, .btn, .sticker, .eyebrow, h2, .about p, .fact strong, .fact small, " +
+    ".when, .item h3, .where, .item p, .card h3, .card p, .tag, .go, .skill h3, .chip, .contact p")]
+    .filter(el => EN[el.innerHTML.trim()] !== undefined);
+  targets.forEach(el => { el.dataset.pt = el.innerHTML.trim(); });
+
+  let words = META.pt.words;
+  function setLang(lang, animate) {
+    document.documentElement.lang = lang === "en" ? "en" : "pt-BR";
+    targets.forEach(el => {
+      el.innerHTML = lang === "en" ? EN[el.dataset.pt] : el.dataset.pt;
+      if (animate) { el.classList.remove("i18n-fade"); void el.offsetWidth; el.classList.add("i18n-fade"); }
+    });
+    document.title = META[lang].title;
+    document.querySelector(".portrait img").alt = META[lang].alt;
+    document.getElementById("lang").setAttribute("aria-label", META[lang].btn);
+    words = META[lang].words;
+    w = 0; i = 0; deleting = false;
+    try { localStorage.setItem("lang", lang); } catch (e) {}
+  }
+  function initialLang() {
+    const q = new URLSearchParams(location.search).get("lang");
+    if (q === "en" || q === "pt") return q;
+    try { const saved = localStorage.getItem("lang"); if (saved) return saved; } catch (e) {}
+    return (navigator.language || "pt").toLowerCase().startsWith("pt") ? "pt" : "en";
+  }
+  document.getElementById("lang").addEventListener("click", () => {
+    setLang(document.documentElement.lang === "en" ? "pt" : "en", true);
+  });
+
   // efeito de digitação
-  const words = ["ciência de dados", "pipelines de ETL", "machine learning", "NLP", "visualização de dados"];
   const el = document.getElementById("typed");
   let w = 0, i = words[0].length, deleting = true;
+  const startLang = initialLang();
+  if (startLang === "en") { setLang("en", false); el.textContent = ""; }
   function tick() {
     const word = words[w];
     i += deleting ? -1 : 1;

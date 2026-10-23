@@ -254,7 +254,7 @@
         <p class="lead">Estudante de Ciência da Computação na UFOP. Construo pipelines de dados, modelos de machine learning e análises que ajudam a tomar decisões.</p>
         <div class="btns">
           <a class="btn primary" href="#projetos">Ver projetos →</a>
-          <a class="btn" href="curriculo-mariana-macedo.pdf" target="_blank" rel="noopener">Baixar currículo</a>
+          <a class="btn" id="cv" href="curriculo-mariana-macedo.pdf" target="_blank" rel="noopener">Baixar currículo</a>
         </div>
       </div>
       <div class="portrait">
@@ -408,7 +408,7 @@
     "Eu trabalho com": "I work with",
     "Estudante de Ciência da Computação na UFOP. Construo pipelines de dados, modelos de machine learning e análises que ajudam a tomar decisões.":
       "Computer Science student at UFOP (Brazil). I build data pipelines, machine learning models and analyses that support decision-making.",
-    "Ver projetos →": "See projects →", "Baixar currículo": "Download résumé (PT)",
+    "Ver projetos →": "See projects →", "Baixar currículo": "Download résumé",
     "📍 Belo Horizonte": "📍 Belo Horizonte, Brazil",
     "Sobre mim": "About me", "Dados, curiosidade e café": "Data, curiosity and coffee",
     "Sou graduanda em Ciência da Computação na Universidade Federal de Ouro Preto, com conclusão prevista para dezembro de 2026. Meu objetivo é atuar profissionalmente em ciência de dados.":
@@ -464,9 +464,9 @@
     "Estou buscando oportunidades em ciência de dados. Fique à vontade para me chamar!": "I'm looking for opportunities in data science. Feel free to reach out!",
   };
   const META = {
-    pt: { title: "Mariana Macedo · Ciência de Dados", alt: "Foto de Mariana Macedo", btn: "Switch to English",
+    pt: { title: "Mariana Macedo · Ciência de Dados", alt: "Foto de Mariana Macedo", btn: "Switch to English", cv: "curriculo-mariana-macedo.pdf",
           words: ["ciência de dados", "pipelines de ETL", "machine learning", "NLP", "visualização de dados"] },
-    en: { title: "Mariana Macedo · Data Science", alt: "Photo of Mariana Macedo", btn: "Mudar para português",
+    en: { title: "Mariana Macedo · Data Science", alt: "Photo of Mariana Macedo", btn: "Mudar para português", cv: "resume-mariana-macedo.pdf",
           words: ["data science", "ETL pipelines", "machine learning", "NLP", "data visualization"] },
   };
   const targets = [...document.querySelectorAll(
@@ -484,6 +484,7 @@
     });
     document.title = META[lang].title;
     document.querySelector(".portrait img").alt = META[lang].alt;
+    document.getElementById("cv").href = META[lang].cv;
     document.getElementById("lang").setAttribute("aria-label", META[lang].btn);
     words = META[lang].words;
     w = 0; i = 0; deleting = false;

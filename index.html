@@ -195,6 +195,14 @@
   .tag { font-size: .76rem; padding: 3px 10px; border-radius: 999px; background: color-mix(in srgb, var(--c) 45%, transparent); }
   .card.featured { grid-column: 1 / -1; }
   .card.featured p { max-width: 720px; }
+  .card.with-shot { display: grid; grid-template-columns: 1fr minmax(0, 320px); column-gap: 28px; align-content: start; }
+  .card.with-shot > :not(.shot) { grid-column: 1; }
+  .card.with-shot .shot {
+    grid-column: 2; grid-row: 1 / span 5; width: 100%; height: 100%; max-height: 270px;
+    object-fit: cover; object-position: top; border-radius: 14px; border: 1px solid var(--line);
+    transition: transform .4s;
+  }
+  .card.with-shot:hover .shot { transform: scale(1.03); }
   .card .go { font-size: .88rem; font-weight: 500; color: var(--accent); }
   .more { text-align: center; margin-top: 30px; }
 
@@ -219,6 +227,8 @@
     nav ul { display: none; }
     .hero .wrap, .about { grid-template-columns: 1fr; }
     .portrait { order: -1; width: 220px; }
+    .card.with-shot { display: flex; }
+    .card.with-shot .shot { max-height: 200px; margin-top: 6px; }
     .s1 { left: -20%; } .s2 { right: -20%; }
     section { padding: 64px 0; }
   }
@@ -328,6 +338,14 @@
       <div class="eyebrow reveal">Projetos</div>
       <h2 class="reveal">Coisas que eu construí</h2>
       <div class="grid">
+        <a class="card featured with-shot reveal" style="--c:var(--sky)" href="https://github.com/marianamacedoo/pipeline-indicadores-br" target="_blank" rel="noopener">
+          <span class="emoji">📈</span>
+          <h3>Pipeline de indicadores econômicos do Brasil</h3>
+          <p>Pipeline que busca todo dia cinco indicadores na API do Banco Central (dólar, Selic, IPCA, IGP-M e desemprego), organiza os dados em camadas num data warehouse PostgreSQL e entrega um dashboard pronto no Superset. Carga incremental e idempotente, e tudo sobe com um único docker compose up.</p>
+          <div class="tags"><span class="tag">Airflow</span><span class="tag">PostgreSQL</span><span class="tag">SQL</span><span class="tag">Superset</span><span class="tag">Docker</span></div>
+          <span class="go">Ver no GitHub →</span>
+          <img class="shot" src="img/pipeline-dashboard.png" alt="Dashboard do Superset com dólar, Selic, IPCA e desemprego" loading="lazy">
+        </a>
         <a class="card featured reveal" style="--c:var(--butter)" href="https://github.com/marianamacedoo/TCC1" target="_blank" rel="noopener">
           <span class="emoji">🎓</span>
           <h3>TCC 1 · Classificação automática de mensagens de erro em programação</h3>
@@ -440,6 +458,9 @@
     "Técnico em Informática": "IT Technician (high school technical degree)",
     "Instituto Federal do Norte de Minas Gerais (IFNMG)": "Federal Institute of Northern Minas Gerais (IFNMG)",
     "Coisas que eu construí": "Things I've built",
+    "Pipeline de indicadores econômicos do Brasil": "Brazilian economic indicators pipeline",
+    "Pipeline que busca todo dia cinco indicadores na API do Banco Central (dólar, Selic, IPCA, IGP-M e desemprego), organiza os dados em camadas num data warehouse PostgreSQL e entrega um dashboard pronto no Superset. Carga incremental e idempotente, e tudo sobe com um único docker compose up.":
+      "Pipeline that fetches five indicators from the Central Bank of Brazil API every day (USD/BRL, Selic rate, IPCA and IGP-M inflation, unemployment), organizes the data in layers in a PostgreSQL data warehouse and delivers a ready-made Superset dashboard. Incremental, idempotent loads, and everything starts with a single docker compose up.",
     "TCC 1 · Classificação automática de mensagens de erro em programação": "Thesis I · Automatic classification of programming error messages",
     "Primeira etapa do meu TCC. Classifica erros de compilação em C pelo tópico de programação ligado ao erro, como base para um sistema de recomendação educacional. Chegou a 94% de acurácia usando só a mensagem de erro.":
       "First stage of my undergraduate thesis. It classifies C compilation errors by the programming topic behind them, as a basis for an educational recommender system. Reached 94% accuracy using only the error message.",
@@ -485,6 +506,9 @@
     document.title = META[lang].title;
     document.querySelector(".portrait img").alt = META[lang].alt;
     document.getElementById("cv").href = META[lang].cv;
+    document.querySelector(".shot").alt = lang === "en"
+      ? "Superset dashboard with USD/BRL, Selic, IPCA and unemployment"
+      : "Dashboard do Superset com dólar, Selic, IPCA e desemprego";
     document.getElementById("lang").setAttribute("aria-label", META[lang].btn);
     words = META[lang].words;
     w = 0; i = 0; deleting = false;

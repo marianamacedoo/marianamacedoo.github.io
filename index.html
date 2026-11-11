@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Mariana Macedo · Ciência de Dados</title>
+<title>Mariana Macedo · Ciência da Computação</title>
 <meta name="description" content="Portfólio de Mariana Macedo Santos — estudante de Ciência da Computação (UFOP) com foco em ciência e engenharia de dados.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='44' fill='%23c9b6ff'/><text x='50' y='66' font-size='46' text-anchor='middle' font-family='Georgia' fill='%233a3354'>M</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -227,6 +227,8 @@
     nav ul { display: none; }
     .hero .wrap, .about { grid-template-columns: 1fr; }
     .portrait { order: -1; width: 220px; }
+    .hello { font-size: .78rem; white-space: nowrap; }
+    .role { min-height: 3.2em; }
     .card.with-shot { display: flex; }
     .card.with-shot .shot { max-height: 200px; margin-top: 6px; }
     .s1 { left: -20%; } .s2 { right: -20%; }
@@ -258,9 +260,9 @@
   <header class="hero">
     <div class="wrap">
       <div>
-        <span class="hello"><span class="dot"></span> Aberta a oportunidades em dados</span>
+        <span class="hello"><span class="dot"></span> Aberta a oportunidades em tecnologia e dados</span>
         <h1>Oi, eu sou a <span class="hl">Mariana Macedo</span></h1>
-        <div class="role"><span class="role-pre">Eu trabalho com</span> <span class="typed" id="typed">ciência de dados</span></div>
+        <div class="role"><span class="role-pre">Eu gosto de</span> <span class="typed" id="typed">transformar dados em respostas</span></div>
         <p class="lead">Estudante de Ciência da Computação na UFOP. Construo pipelines de dados, modelos de machine learning e análises que ajudam a tomar decisões.</p>
         <div class="btns">
           <a class="btn primary" href="#projetos">Ver projetos →</a>
@@ -281,7 +283,7 @@
       <h2 class="reveal">Dados e curiosidade</h2>
       <div class="about">
         <div class="reveal">
-          <p>Sou graduanda em Ciência da Computação na Universidade Federal de Ouro Preto, com conclusão prevista para dezembro de 2026. Meu objetivo é atuar profissionalmente em ciência de dados.</p>
+          <p>Sou graduanda em Ciência da Computação na Universidade Federal de Ouro Preto, com conclusão prevista para dezembro de 2026. Tenho interesse especial em dados, mas gosto de tecnologia como um todo.</p>
           <p>Fiz intercâmbio em <strong>Industrial Data Science</strong> na Montanuniversität Leoben, na Áustria, onde aprofundei machine learning aplicado e otimização de processos. Hoje atuo no setor de Data Analytics do Laboratório TerraLab, cuidando de pipelines de ETL e infraestrutura de dados.</p>
           <p>Também gosto de trabalhar com pessoas: fui vice-diretora do Diretório Acadêmico de Ciência da Computação, organizando eventos e workshops.</p>
         </div>
@@ -406,7 +408,7 @@
       <div class="contact reveal">
         <div class="eyebrow">Contato</div>
         <h2>Vamos conversar?</h2>
-        <p>Estou buscando oportunidades em ciência de dados. Fique à vontade para me chamar!</p>
+        <p>Estou aberta a vagas júnior em tecnologia. Fique à vontade para me chamar!</p>
         <div class="btns">
           <a class="btn primary" href="mailto:marimacedosantos@gmail.com">✉️ marimacedosantos@gmail.com</a>
           <a class="btn" href="https://www.linkedin.com/in/mariana-macedo-7b9ab3227" target="_blank" rel="noopener">LinkedIn</a>
@@ -421,16 +423,16 @@
   // traduções: texto em português -> inglês
   const EN = {
     "Sobre": "About", "Trajetória": "Journey", "Projetos": "Projects", "Habilidades": "Skills", "Contato": "Contact",
-    '<span class="dot"></span> Aberta a oportunidades em dados': '<span class="dot"></span> Open to data opportunities',
+    '<span class="dot"></span> Aberta a oportunidades em tecnologia e dados': '<span class="dot"></span> Open to opportunities in tech and data',
     'Oi, eu sou a <span class="hl">Mariana Macedo</span>': 'Hi, I\'m <span class="hl">Mariana Macedo</span>',
-    "Eu trabalho com": "I work with",
+    "Eu gosto de": "I like to",
     "Estudante de Ciência da Computação na UFOP. Construo pipelines de dados, modelos de machine learning e análises que ajudam a tomar decisões.":
       "Computer Science student at UFOP (Brazil). I build data pipelines, machine learning models and analyses that support decision-making.",
     "Ver projetos →": "See projects →", "Baixar currículo": "Download résumé",
     "📍 Belo Horizonte": "📍 Belo Horizonte, Brazil",
     "Sobre mim": "About me", "Dados e curiosidade": "Data and curiosity",
-    "Sou graduanda em Ciência da Computação na Universidade Federal de Ouro Preto, com conclusão prevista para dezembro de 2026. Meu objetivo é atuar profissionalmente em ciência de dados.":
-      "I'm a Computer Science undergraduate at the Federal University of Ouro Preto (UFOP), graduating in December 2026. My goal is to work professionally in data science.",
+    "Sou graduanda em Ciência da Computação na Universidade Federal de Ouro Preto, com conclusão prevista para dezembro de 2026. Tenho interesse especial em dados, mas gosto de tecnologia como um todo.":
+      "I'm a Computer Science undergraduate at the Federal University of Ouro Preto (UFOP), graduating in December 2026. I have a special interest in data, but I enjoy technology as a whole.",
     "Fiz intercâmbio em <strong>Industrial Data Science</strong> na Montanuniversität Leoben, na Áustria, onde aprofundei machine learning aplicado e otimização de processos. Hoje atuo no setor de Data Analytics do Laboratório TerraLab, cuidando de pipelines de ETL e infraestrutura de dados.":
       "I did an exchange semester in <strong>Industrial Data Science</strong> at Montanuniversität Leoben, Austria, where I deepened my knowledge of applied machine learning and process optimization. Today I work in the Data Analytics team at TerraLab, taking care of ETL pipelines and data infrastructure.",
     "Também gosto de trabalhar com pessoas: fui vice-diretora do Diretório Acadêmico de Ciência da Computação, organizando eventos e workshops.":
@@ -482,13 +484,13 @@
     "📊 Visualização &amp; BI": "📊 Visualization &amp; BI", "⚙️ Engenharia": "⚙️ Engineering", "💬 Linguagens": "💬 Languages",
     "Estatística": "Statistics", "Modelagem relacional": "Relational modeling",
     "Vamos conversar?": "Let's talk?",
-    "Estou buscando oportunidades em ciência de dados. Fique à vontade para me chamar!": "I'm looking for opportunities in data science. Feel free to reach out!",
+    "Estou aberta a vagas júnior em tecnologia. Fique à vontade para me chamar!": "I'm open to junior roles in tech. Feel free to reach out!",
   };
   const META = {
-    pt: { title: "Mariana Macedo · Ciência de Dados", alt: "Foto de Mariana Macedo", btn: "Switch to English", cv: "curriculo-mariana-macedo.pdf",
-          words: ["ciência de dados", "pipelines de ETL", "machine learning", "NLP", "visualização de dados"] },
-    en: { title: "Mariana Macedo · Data Science", alt: "Photo of Mariana Macedo", btn: "Mudar para português", cv: "resume-mariana-macedo.pdf",
-          words: ["data science", "ETL pipelines", "machine learning", "NLP", "data visualization"] },
+    pt: { title: "Mariana Macedo · Ciência da Computação", alt: "Foto de Mariana Macedo", btn: "Switch to English", cv: "curriculo-mariana-macedo.pdf",
+          words: ["transformar dados em respostas", "automatizar processos", "construir sistemas", "resolver problemas com tecnologia", "aprender coisas novas"] },
+    en: { title: "Mariana Macedo · Computer Science", alt: "Photo of Mariana Macedo", btn: "Mudar para português", cv: "resume-mariana-macedo.pdf",
+          words: ["turn data into answers", "automate processes", "build systems", "solve problems with technology", "learn new things"] },
   };
   const targets = [...document.querySelectorAll(
     "nav ul a, .hello, h1, .role-pre, .lead, .btn, .sticker, .eyebrow, h2, .about p, .fact strong, .fact small, " +
